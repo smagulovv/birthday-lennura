@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#102f27">
+    <meta name="description" content="Маленький цифровой подарок для Леннуры.">
+    <title>Леннура • 24.08</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!--
+      ПЕРЕД ПУБЛИКАЦИЕЙ:
+      1. В app.py замени YOUR_NAME на своё имя.
+      2. Фотографии положи в static/images/photos/.
+      3. Песню с разрешением на использование положи в static/music/song.mp3.
+      4. Подписи к фото меняются в блоках gallery-card ниже.
+    -->
+
+    <div class="site-noise" aria-hidden="true"></div>
+    <div class="leaf-layer" id="leafLayer" aria-hidden="true"></div>
+    <div class="particle-layer" id="particleLayer" aria-hidden="true"></div>
+
+    <header class="topbar">
+        <a class="brand" href="#top" aria-label="В начало">Lennura<span>•</span></a>
+        <button class="music-mini" id="musicMiniButton" type="button" aria-label="Включить музыку">
+            <span class="mini-bars"><i></i><i></i><i></i></span>
+            <span>музыка</span>
+        </button>
+    </header>
+
+    <main id="top">
+        <section class="hero section-dark" id="hero">
+            <div class="hero-mist mist-one"></div>
+            <div class="hero-mist mist-two"></div>
+            <div class="hero-silhouette tree-left" aria-hidden="true"></div>
+            <div class="hero-silhouette tree-right" aria-hidden="true"></div>
+            <div class="lantern lantern-a" aria-hidden="true"><span></span></div>
+            <div class="lantern lantern-b" aria-hidden="true"><span></span></div>
+
+            <div class="hero-content reveal visible">
+                <p class="eyebrow">маленький цифровой подарок</p>
+                <h1>Леннура</h1>
+                <div class="hero-date">24.08 <span>•</span> 22 года</div>
+                <p class="hero-lead">Сегодня день, который хочется сохранить.</p>
+                <button class="open-button" id="openButton" type="button">
+                    <span>Открыть</span><span class="open-arrow">↓</span>
+                </button>
+            </div>
+
+            <div class="hero-bottom">
+                <span>листай медленно</span><span class="scroll-line"></span>
+            </div>
+        </section>
+
+        <section class="section music-section" id="music">
+            <div class="section-inner narrow reveal">
+                <p class="section-kicker">01 / маленькая загадка</p>
+                <h2>Эта песня просто<br><em>должна здесь быть.</em></h2>
+                <div class="music-player" id="musicPlayer">
+                    <div class="record-art">
+                        <div class="record"><div class="record-label">L</div></div>
+                        <div class="needle"></div>
+                    </div>
+                    <div class="music-info">
+                        <p class="music-caption">для дороги, наушников и мыслей</p>
+                        <h3>What Does It Mean To You</h3>
+                        <p>Carpetman</p>
+                        <div class="music-controls">
+                            <button class="play-button" id="playButton" type="button" aria-label="Воспроизвести"><span class="play-icon">▶</span></button>
+                            <div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                        </div>
+                        <div class="track-line">
+                            <span id="trackCurrent">00:00</span>
+                            <div class="progress"><span id="progressFill"></span></div>
+                            <span id="trackDuration">00:00</span>
+                        </div>
+                    </div>
+                    <audio id="audio" preload="metadata">
+                        <source src="{{ url_for('static', filename='music/song.mp3') }}" type="audio/mpeg">
+                    </audio>
+                </div>
+            
+            </div>
+        </section>
+
+        <section class="section about-section" id="about">
+            <div class="section-inner">
+                <div class="intro reveal">
+                    <p class="section-kicker">02 / о тебе</p>
+                    <h2>Ты — человек, которого хочется описывать<br><em>не одним предложением.</em></h2>
+                </div>
+                <div class="memory-grid">
+                    <article class="memory-card sketch-card reveal">
+                        <div class="card-number">01</div>
+                        <div class="sketch-doodle palette-doodle" aria-hidden="true">
+                            <span class="paint paint-one"></span><span class="paint paint-two"></span><span class="paint paint-three"></span><span class="brush"></span>
+                        </div>
+                        <div class="card-icon">🎨</div><h3>Художница</h3>
+                        <p>Ты умеешь замечать то, мимо чего другие иногда просто проходят. Наверное, поэтому тебе и дано рисовать — видеть детали и превращать их во что-то своё.</p>
+                        <span class="scribble">не потеряй свой взгляд</span>
+                    </article>
+
+                    <article class="memory-card wheels-card reveal">
+                        <div class="card-number">02</div>
+                        <div class="wheels-illustration" aria-hidden="true">
+                            <span class="wheel wheel-a"></span><span class="wheel wheel-b"></span><span class="wheel wheel-c"></span><span class="wheel wheel-d"></span><span class="skate-body"></span>
+                        </div>
+                        <div class="card-icon">🛼</div><h3>Ролики</h3>
+                        <p>За эти два года мы почему-то почти не гуляли просто так. Зато сколько раз мы катались… Учились новым трюкам, что-то придумывали, дурачились и иногда превращали обычный день в маленькую историю.</p>
+                        <p>Наверное, именно из таких простых моментов и собираются самые тёплые воспоминания.</p>
+                    </article>
+
+                    <article class="memory-card music-card reveal">
+                        <div class="card-number">03</div>
+                        <div class="headphones-illustration" aria-hidden="true"><div class="headphones"></div><div class="sound-wave"><span></span><span></span><span></span><span></span><span></span></div></div>
+                        <div class="card-icon">🎧</div><h3>Музыка</h3>
+                        <p>Иногда достаточно просто надеть наушники, включить свою музыку и ненадолго исчезнуть от всего вокруг.</p>
+                        <div class="equalizer"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section titles-section" id="titles">
+            <div class="gate-frame" aria-hidden="true"><div class="gate-roof"></div><div class="gate-pillars"></div><div class="gate-door left"></div><div class="gate-door right"></div></div>
+            <div class="section-inner title-inner reveal">
+                <p class="section-kicker">03 / государственная тайна</p>
+                <h2>Дама и милорд</h2>
+                <p class="title-intro">У каждого уважающего себя дворца должны быть свои титулы.</p>
+                <div class="titles-cards">
+                    <div class="royal-card lady"><div class="royal-glow"></div><div class="crown">⚔</div><span>официальный титул</span><strong>Милорд Леннура</strong><small>хранительница кистей и хороших историй</small></div>
+                    <div class="versus">и</div>
+                    <div class="royal-card lord"><div class="royal-glow"></div><div class="sword">♛</div><span>не менее официальный титул</span><strong>Дама Асет</strong><small>история титула неизвестна. отменять уже поздно.</small></div>
+                </div>
+                <p class="royal-note">История этих титулов неизвестна. Но отменять их уже поздно.</p>
+            </div>
+        </section>
+
+        <section class="section letter-section" id="letter">
+            <div class="section-inner letter-layout">
+                <div class="letter-side reveal"><p class="section-kicker">04 / то, что осталось между строк</p><div class="chinese-stamp">友</div><p class="side-note">для человека,<br>которому хочется<br>сказать главное</p></div>
+                <article class="letter-paper reveal">
+                    <div class="paper-corner"></div>
+                    <p class="letter-small">Леннуре — 22</p>
+                    <h2>Есть вещи, которые<br><em>не хочется оставлять между строк.</em></h2>
+                    <p>Ты мне очень дорога, и в твой день рождения мне хочется пожелать тебе не каких-то идеальных дней, а настоящего добра — того, которое остаётся рядом даже тогда, когда всё вокруг становится сложнее.</p>
+                    <p>Пусть рядом с тобой будут люди, которым можно доверять. Люди, которые умеют заметить, когда тебе тяжело, выслушать без лишних слов и помочь снова почувствовать почву под ногами.</p>
+                    <p>Хочется, чтобы в твоей жизни было больше спокойствия, счастливых случайностей, моментов, которые потом вспоминаются с улыбкой, и причин просыпаться с ощущением, что впереди ещё много хорошего.</p>
+                    <p>А каким бы ни оказался следующий год, пусть он будет к тебе добрее, чем иногда бывает жизнь. И пусть в нём найдётся место всему, что делает тебя именно тобой.</p>
+                    <p class="letter-final">С днём рождения, Леннура.<br><span>Береги себя. И пожалуйста, продолжай рисовать.</span> ❤️</p>
+                    <div class="letter-sign">твоя Дама<3</div>
+                </article>
+            </div>
+        </section>
+
+<section class="section memories-section" id="gallery">
+    <div class="section-inner">
+
+        <div class="intro reveal">
+            <p class="section-kicker">05 / маленькие вещи, которые хочется помнить</p>
+
+            <h2>
+                Не всё важное<br>
+                <em>нужно фотографировать.</em>
+            </h2>
+
+            <p class="intro-copy">
+                Иногда воспоминание — это просто момент, который почему-то
+                остался в голове. И именно такие моменты почему-то оказываются
+                самыми тёплыми.
+            </p>
+        </div>
+
+        <div class="memory-cards">
+
+            <button class="memory-card reveal" type="button">
+                <span class="memory-number">01</span>
+                <span class="memory-icon">🛼</span>
+
+                <strong>Круг за кругом</strong>
+
+                <p>
+                    Мы снова и снова катались, пробовали новые трюки,
+                    ошибались, смеялись и почему-то продолжали пытаться.
+                </p>
+
+                <span class="memory-hint">нажми</span>
+            </button>
+
+
+            <button class="memory-card reveal" type="button">
+                <span class="memory-number">02</span>
+                <span class="memory-icon">⛸</span>
+
+                <strong>Ещё один круг</strong>
+
+                <p>
+                    Иногда казалось, что мы пришли просто покататься.
+                    А потом оказывалось, что обычный день снова превратился
+                    в маленькую историю.
+                </p>
+
+                <span class="memory-hint">нажми</span>
+            </button>
+
+
+            <button class="memory-card reveal" type="button">
+                <span class="memory-number">03</span>
+                <span class="memory-icon">🎨</span>
+
+                <strong>То, что видишь ты</strong>
+
+                <p>
+                    Ты умеешь замечать детали и превращать их во что-то своё.
+                    Наверное, поэтому рисование так тебе подходит.
+                </p>
+
+                <span class="memory-hint">нажми</span>
+            </button>
+
+
+            <button class="memory-card reveal" type="button">
+                <span class="memory-number">04</span>
+                <span class="memory-icon">🎧</span>
+
+                <strong>Своя музыка</strong>
+
+                <p>
+                    Наушники, любимая музыка и несколько минут,
+                    когда весь остальной мир можно поставить на паузу.
+                </p>
+
+                <span class="memory-hint">нажми</span>
+            </button>
+
+
+            <button class="memory-card memory-card-wide reveal" type="button">
+                <span class="memory-number">05</span>
+                <span class="memory-icon">🍃</span>
+
+                <strong>И много совершенно обычных моментов</strong>
+
+                <p>
+                    За два года было много всего, что невозможно нормально
+                    записать в список. Какие-то глупости, разговоры,
+                    придуманные вещи и просто моменты, которые тогда
+                    казались обычными.
+
+                    А теперь понимаешь — именно из них всё и состоит.
+                </p>
+
+                <span class="memory-hint">нажми</span>
+            </button>
+
+        </div>
+
+        <div class="memory-final reveal">
+            <span class="memory-final-leaf">🍃</span>
+
+            <p>
+                Может быть, когда-нибудь здесь появятся фотографии.
+                А пока пусть здесь останется то,
+                что фотографировать совсем не обязательно.
+            </p>
+        </div>
+
+    </div>
+</section>
+
+        <section class="section timeline-section" id="timeline">
+            <div class="section-inner narrow">
+                <div class="intro reveal"><p class="section-kicker">06 / маленькая история</p><h2><span class="big-number">2</span> года</h2><p class="intro-copy">Без точных дат. Просто несколько вещей, которые остались.</p></div>
+                <div class="timeline">
+                    <div class="timeline-line"></div>
+                    <article class="timeline-item reveal"><span class="timeline-dot"></span><span class="timeline-index">01</span><h3>Познакомились</h3><p>С этого всё как-то началось.</p></article>
+                    <article class="timeline-item reveal"><span class="timeline-dot"></span><span class="timeline-index">02</span><h3>Начали кататься</h3><p>И обычные прогулки быстро стали движением.</p></article>
+                    <article class="timeline-item reveal"><span class="timeline-dot"></span><span class="timeline-index">03</span><h3>Новые трюки</h3><p>Пробовали, падали, снова пробовали.</p></article>
+                    <article class="timeline-item reveal"><span class="timeline-dot"></span><span class="timeline-index">04</span><h3>Много глупостей</h3><p>И, к счастью, достаточно причин смеяться.</p></article>
+                    <article class="timeline-item reveal"><span class="timeline-dot"></span><span class="timeline-index">05</span><h3>Много маленьких воспоминаний</h3><p>Тех, которые невозможно нормально объяснить — только вспомнить.</p></article>
+                    <article class="timeline-item reveal"><span class="timeline-dot"></span><span class="timeline-index">06</span><h3>И вот уже 22</h3><p>Кажется, пора сохранить ещё несколько страниц.</p></article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section bird-section" id="bird">
+            <div class="bird-forest">
+                <div class="far-mountain"></div>
+                <div class="distant-pavilion" aria-hidden="true"><span class="roof"></span><span class="body"></span><span class="column c1"></span><span class="column c2"></span><span class="column c3"></span></div>
+                <div class="bird" id="birdObject" aria-hidden="true"><span class="wing wing-left"></span><span class="wing wing-right"></span><span class="bird-body"></span></div>
+                <div class="forest-tree tree-1"></div><div class="forest-tree tree-2"></div><div class="forest-tree tree-3"></div>
+            </div>
+            <div class="section-inner bird-inner reveal">
+                <button class="surprise-button" id="surpriseButton" type="button">А если бы ты могла выбрать… 🕊️</button>
+                <div class="surprise-message" id="surpriseMessage"><p>Ты когда-то говорила, что хотела бы переродиться птицей.</p><p>Не знаю, почему именно птицей.</p><p class="highlight">Но если когда-нибудь такое и возможно,<br>надеюсь, тебе достанется самое красивое небо.</p></div>
+            </div>
+        </section>
+
+        <section class="section finale-section" id="finale">
+            <div class="finale-sky"></div><div class="finale-land"></div>
+            <div class="finale-tree" aria-hidden="true"><span class="trunk"></span><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="finale-pavilion" aria-hidden="true"><span class="roof"></span><span class="roof roof-two"></span><span class="columns"></span></div>
+            <div class="finale-content reveal">
+                <p class="finale-small">и на этом пути</p>
+                <h2>С днём рождения,<br><em>Леннура.</em></h2>
+                <p class="finale-age">22 — это только начало.</p>
+                <div class="finale-lines"><p>Береги себя.</p><p>Будь счастлива.</p><p>Рисуй.</p><p>Катись вперёд.</p><p>Слушай свою музыку.</p><p>И никогда не забывай, сколько в тебе прекрасного.</p></div>
+                <div class="finale-sign">От твоего друга. <span>❤️</span></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="image-modal" id="imageModal" aria-hidden="true">
+        <button class="modal-close" id="modalClose" type="button" aria-label="Закрыть">×</button>
+        <div class="modal-content"><img id="modalImage" src="" alt=""><p id="modalCaption"></p></div>
+    </div>
+
+    <footer class="footer"><span>made slowly, with memories</span><span>24.08 • Lennura</span></footer>
+
+    <script>window.LENNURA_CONFIG = { yourName: {{ your_name|tojson }} };</script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
